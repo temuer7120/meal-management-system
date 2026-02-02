@@ -1,0 +1,10 @@
+Flask==2.2.5
+Flask-SQLAlchemy==3.0.3
+Flask-JWT-Extended==4.4.4
+pandas==2.0.3
+openpyxl==3.1.2
+python-dotenv==1.0.0
+SQLAlchemy==1.4.46
+numpy==1.23.5
+pymysql==1.0.2
+mysql-connector-python==8.0.30
