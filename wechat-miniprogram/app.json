@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/menu/menu",
+    "pages/customer/customer",
+    "pages/admin/admin",
+    "pages/upload/upload"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#4CAF50",
+    "navigationBarTitleText": "餐食管理系统",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/menu/menu",
+        "text": "菜单"
+      },
+      {
+        "pagePath": "pages/customer/customer",
+        "text": "客户"
+      },
+      {
+        "pagePath": "pages/admin/admin",
+        "text": "管理"
+      }
+    ],
+    "color": "#666666",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}
