@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>餐食管理系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Microsoft YaHei', Arial, sans-serif; background-color: #f8f9fa; }
+        .navbar { background-color: #4CAF50; }
+        .navbar-brand, .navbar-nav .nav-link { color: white !important; }
+        .card { border-radius: 10px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); }
+        .card-header { background-color: #4CAF50; color: white; font-weight: bold; }
+        .btn-primary { background-color: #4CAF50; border-color: #4CAF50; }
+        .btn-primary:hover { background-color: #388E3C; }
+        .info-card { background-color: white; border-radius: 8px; padding: 1.5rem; text-align: center; }
+        .info-card i { font-size: 2rem; color: #4CAF50; margin-bottom: 1rem; }
+        .page-title { color: #4CAF50; font-weight: bold; margin-bottom: 1.5rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">餐食管理系统</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#dashboard">首页</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#menu">菜单管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dish">菜品管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#customer">客户管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#order">订单管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div id="dashboard">
+            <h2 class="page-title">系统概览</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="info-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>菜品总数</h3>
+                        <p id="dishCount">0</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-card">
+                        <i class="fas fa-users"></i>
+                        <h3>客户总数</h3>
+                        <p id="customerCount">0</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>订单总数</h3>
+                        <p id="orderCount">0</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>今日菜单</h3>
+                        <p id="menuCount">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_BASE = '/api';
+        let token = localStorage.getItem('token');
+
+        async function fetchData() {
+            try {
+                const dishesResponse = await fetch(`${API_BASE}/dishes`);
+                const dishes = await dishesResponse.json();
+                document.getElementById('dishCount').textContent = dishes.length;
+
+                const customersResponse = await fetch(`${API_BASE}/customers`);
+                const customers = await customersResponse.json();
+                document.getElementById('customerCount').textContent = customers.length;
+
+                const ordersResponse = await fetch(`${API_BASE}/orders`);
+                const orders = await ordersResponse.json();
+                document.getElementById('orderCount').textContent = orders.length;
+
+                const menusResponse = await fetch(`${API_BASE}/daily_menus`);
+                const menus = await menusResponse.json();
+                document.getElementById('menuCount').textContent = menus.length;
+            } catch (error) {
+                console.error('获取数据失败:', error);
+            }
+        }
+
+        fetchData();
+    </script>
+</body>
+</html>
